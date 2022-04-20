@@ -14,6 +14,8 @@
 		E8376B0A2810BE04002B7153 /* iMusic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E8376B082810BE04002B7153 /* iMusic.xcdatamodeld */; };
 		E8376B0C2810BE06002B7153 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8376B0B2810BE06002B7153 /* Assets.xcassets */; };
 		E8376B0F2810BE06002B7153 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8376B0D2810BE06002B7153 /* LaunchScreen.storyboard */; };
+		E8376B172810C21F002B7153 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E8376B162810C21F002B7153 /* README.md */; };
+		E8376B192810C232002B7153 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E8376B182810C232002B7153 /* LICENSE */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		E8376B0B2810BE06002B7153 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E8376B0E2810BE06002B7153 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E8376B102810BE06002B7153 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E8376B162810C21F002B7153 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		E8376B182810C232002B7153 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +46,8 @@
 		E8376AF32810BE04002B7153 = {
 			isa = PBXGroup;
 			children = (
+				E8376B162810C21F002B7153 /* README.md */,
+				E8376B182810C232002B7153 /* LICENSE */,
 				E8376AFE2810BE04002B7153 /* iMusic */,
 				E8376AFD2810BE04002B7153 /* Products */,
 			);
@@ -130,7 +136,9 @@
 			files = (
 				E8376B0F2810BE06002B7153 /* LaunchScreen.storyboard in Resources */,
 				E8376B0C2810BE06002B7153 /* Assets.xcassets in Resources */,
+				E8376B172810C21F002B7153 /* README.md in Resources */,
 				E8376B072810BE04002B7153 /* Main.storyboard in Resources */,
+				E8376B192810C232002B7153 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

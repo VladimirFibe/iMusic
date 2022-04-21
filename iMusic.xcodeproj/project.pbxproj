@@ -19,6 +19,7 @@
 		E8376B1D2810C2E8002B7153 /* MakeItSo.png in Resources */ = {isa = PBXBuildFile; fileRef = E8376B1C2810C2E8002B7153 /* MakeItSo.png */; };
 		E8376B1F2810C889002B7153 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8376B1E2810C889002B7153 /* MainTabBarController.swift */; };
 		E8376B212810C99C002B7153 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8376B202810C99C002B7153 /* SearchViewController.swift */; };
+		E8376B242810EEFC002B7153 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E8376B232810EEFC002B7153 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8376B242810EEFC002B7153 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +119,9 @@
 			dependencies = (
 			);
 			name = iMusic;
+			packageProductDependencies = (
+				E8376B232810EEFC002B7153 /* Alamofire */,
+			);
 			productName = iMusic;
 			productReference = E8376AFC2810BE04002B7153 /* iMusic.app */;
 			productType = "com.apple.product-type.application";
@@ -145,6 +150,9 @@
 				Base,
 			);
 			mainGroup = E8376AF32810BE04002B7153;
+			packageReferences = (
+				E8376B222810EEFC002B7153 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = E8376AFD2810BE04002B7153 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -332,9 +340,8 @@
 				INFOPLIST_FILE = iMusic/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -360,9 +367,8 @@
 				INFOPLIST_FILE = iMusic/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -398,6 +404,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E8376B222810EEFC002B7153 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E8376B232810EEFC002B7153 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E8376B222810EEFC002B7153 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		E8376B082810BE04002B7153 /* iMusic.xcdatamodeld */ = {

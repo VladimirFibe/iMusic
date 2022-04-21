@@ -6,13 +6,13 @@
 //
 import SwiftUI
 import UIKit
-import Alamofire
 
 
 class SearchViewController: UITableViewController {
   let cellId = "cellId"
   var tracks = [Track]()
   private var timer: Timer?
+  var networkService = NetworkService()
   let searchController = UISearchController(searchResultsController: nil)
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -48,28 +48,14 @@ extension SearchViewController: UISearchBarDelegate {
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     timer?.invalidate()
     timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
-      
-      let url = "https://itunes.apple.com/search"
-      let parameters = ["term": searchText, "limit": "10"]
-      AF.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseData { dataResponse in
-        if let error = dataResponse.error {
-          print(error.localizedDescription)
-          return
-        }
-        guard let data = dataResponse.data else { return }
-        let decoder = JSONDecoder()
-        do {
-          let objects = try decoder.decode(SearchResponse.self, from: data)
-          self.tracks = objects.results
-          self.tableView.reloadData()
-        } catch {
-          print(error.localizedDescription)
-        }
-        
+      self.networkService.fetchTracks(searchText) { [weak self] result in
+        self?.tracks = result?.results ?? []
+        self?.tableView.reloadData()
       }
     }
   }
 }
+// MARK: - Preview
 struct SearchViewController_Previews: PreviewProvider {
   static var previews: some View {
     SwiftUIMainTabBarController()

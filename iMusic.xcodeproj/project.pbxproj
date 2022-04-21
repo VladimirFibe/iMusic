@@ -21,6 +21,7 @@
 		E8376B212810C99C002B7153 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8376B202810C99C002B7153 /* SearchViewController.swift */; };
 		E8376B242810EEFC002B7153 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E8376B232810EEFC002B7153 /* Alamofire */; };
 		E8376B282810F516002B7153 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8376B272810F515002B7153 /* SearchResponse.swift */; };
+		E8376B2A28111111002B7153 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8376B2928111110002B7153 /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		E8376B1E2810C889002B7153 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		E8376B202810C99C002B7153 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		E8376B272810F515002B7153 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
+		E8376B2928111110002B7153 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				E8376B032810BE04002B7153 /* ViewController.swift */,
 				E8376B1E2810C889002B7153 /* MainTabBarController.swift */,
 				E8376B202810C99C002B7153 /* SearchViewController.swift */,
+				E8376B2928111110002B7153 /* NetworkService.swift */,
 				E8376B052810BE04002B7153 /* Main.storyboard */,
 				E8376B0B2810BE06002B7153 /* Assets.xcassets */,
 				E8376B0D2810BE06002B7153 /* LaunchScreen.storyboard */,
@@ -188,6 +191,7 @@
 			files = (
 				E8376B212810C99C002B7153 /* SearchViewController.swift in Sources */,
 				E8376B042810BE04002B7153 /* ViewController.swift in Sources */,
+				E8376B2A28111111002B7153 /* NetworkService.swift in Sources */,
 				E8376B0A2810BE04002B7153 /* iMusic.xcdatamodeld in Sources */,
 				E8376B282810F516002B7153 /* SearchResponse.swift in Sources */,
 				E8376B1F2810C889002B7153 /* MainTabBarController.swift in Sources */,

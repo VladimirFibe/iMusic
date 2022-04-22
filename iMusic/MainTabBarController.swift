@@ -13,7 +13,12 @@ class MainTabBarController: UITabBarController {
     super.viewDidLoad()
     view.backgroundColor = .white
     tabBar.tintColor = #colorLiteral(red: 1, green: 0.1719063818, blue: 0.4505617023, alpha: 1)
-    viewControllers = [generateViewController(rootViewController: SearchViewController(), image: UIImage(systemName: "magnifyingglass"), title: "Search"), generateViewController(rootViewController: ViewController(), image: UIImage(named: "Library"), title: "Library")]
+    viewControllers = [generateViewController(rootViewController: SearchViewController(style: .plain),
+                                              image: UIImage(systemName: "magnifyingglass"),
+                                              title: "Search"),
+                       generateViewController(rootViewController: ViewController(),
+                                              image: UIImage(named: "Library"),
+                                              title: "Library")]
   }
   
   private func generateViewController(rootViewController: UIViewController, image: UIImage?, title: String) -> UIViewController {

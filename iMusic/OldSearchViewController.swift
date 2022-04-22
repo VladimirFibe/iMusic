@@ -8,7 +8,7 @@ import SwiftUI
 import UIKit
 
 
-class SearchViewController: UITableViewController {
+class OldSearchViewController: UITableViewController {
   let cellId = "cellId"
   var tracks = [Track]()
   private var timer: Timer?
@@ -27,9 +27,11 @@ class SearchViewController: UITableViewController {
     navigationItem.hidesSearchBarWhenScrolling = false
     searchController.searchBar.delegate = self
   }
+  
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     60
   }
+  
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     tracks.count
   }
@@ -44,10 +46,10 @@ class SearchViewController: UITableViewController {
   }
 }
 // MARK: - UISearchBarDelegate
-extension SearchViewController: UISearchBarDelegate {
+extension OldSearchViewController: UISearchBarDelegate {
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     timer?.invalidate()
-    timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+    timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
       self.networkService.fetchTracks(searchText) { [weak self] result in
         self?.tracks = result?.results ?? []
         self?.tableView.reloadData()
@@ -55,10 +57,4 @@ extension SearchViewController: UISearchBarDelegate {
     }
   }
 }
-// MARK: - Preview
-struct SearchViewController_Previews: PreviewProvider {
-  static var previews: some View {
-    SwiftUIMainTabBarController()
-      .edgesIgnoringSafeArea(.all)
-  }
-}
+

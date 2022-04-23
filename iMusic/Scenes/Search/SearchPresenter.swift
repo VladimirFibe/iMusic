@@ -12,22 +12,23 @@
 
 import UIKit
 
-protocol SearchPresentationLogic
-{
+protocol SearchPresentationLogic {
   func presentSomething(response: Search.Something.Response)
 }
 
-class SearchPresenter: SearchPresentationLogic
-{
+class SearchPresenter: SearchPresentationLogic {
   weak var viewController: SearchDisplayLogic?
   
   // MARK: Do something
   
-  func presentSomething(response: Search.Something.Response)
-  {
-    print(response)
+  func presentSomething(response: Search.Something.Response) {
     let results = response.searchResponse?.results ?? []
-    let viewModel = Search.Something.ViewModel(tracks: results)
+    let cells = results.map { Search.Something.ViewModel.Cell(iconUrlString: $0.artworkUrl100 ?? "",
+                                                              trackName: $0.trackName,
+                                                              artistName: $0.artistName,
+                                                              collectionName: $0.collectionName ?? "",
+                                                              previewUrl: $0.previewUrl)}
+    let viewModel = Search.Something.ViewModel(cells: cells)
     viewController?.displaySomething(viewModel: viewModel)
   }
 }

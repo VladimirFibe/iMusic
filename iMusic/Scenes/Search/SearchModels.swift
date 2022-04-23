@@ -22,7 +22,14 @@ enum Search
       var searchResponse: SearchResponse?
     }
     struct ViewModel {
-      var tracks = [Track]()
+      let cells: [Cell]
+      struct Cell: TrackCellViewModel {
+        var iconUrlString: String
+        var trackName: String
+        var artistName: String
+        var collectionName: String
+        var previewUrl: String?
+      }
     }
   }
 }

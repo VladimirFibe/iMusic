@@ -20,8 +20,7 @@ protocol SearchDisplayLogic: AnyObject
 class SearchViewController: UITableViewController, SearchDisplayLogic {
   var interactor: SearchBusinessLogic?
   var router: (NSObjectProtocol & SearchRoutingLogic & SearchDataPassing)?
-  var tracks = [Track]()
-  let seachCellId = "seachCellId"
+  var tracks = [TrackCellViewModel]()
   let searchController = UISearchController(searchResultsController: nil)
   private var timer: Timer?
   
@@ -71,7 +70,7 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
   {
     super.viewDidLoad()
     view.backgroundColor = .white
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: seachCellId)
+    tableView.register(TrackCell.self, forCellReuseIdentifier: TrackCell.reuseId)
     navigationItem.searchController = searchController
     navigationItem.hidesSearchBarWhenScrolling = false
     searchController.searchBar.delegate = self
@@ -90,20 +89,23 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
   
   func displaySomething(viewModel: Search.Something.ViewModel)
   {
-    tracks = viewModel.tracks
+    tracks = viewModel.cells
     tableView.reloadData()
 
     //nameTextField.text = viewModel.name
   }
   
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    84.0
+  }
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     tracks.count
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: seachCellId, for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier: TrackCell.reuseId, for: indexPath) as! TrackCell
     let track = tracks[indexPath.row]
-    cell.textLabel?.text = track.trackName
+    cell.configure(with: track)
     return cell
   }
 }

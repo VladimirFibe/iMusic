@@ -14,6 +14,7 @@ import UIKit
 
 protocol SearchDisplayLogic: AnyObject
 {
+  func displayLoader()
   func displaySomething(viewModel: Search.Something.ViewModel)
 }
 
@@ -23,6 +24,7 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
   var tracks = [TrackCellViewModel]()
   let searchController = UISearchController(searchResultsController: nil)
   private var timer: Timer?
+  private lazy var footerView = FooterView()
   
   // MARK: Object lifecycle
   
@@ -71,6 +73,7 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
     super.viewDidLoad()
     view.backgroundColor = .white
     tableView.register(TrackCell.self, forCellReuseIdentifier: TrackCell.reuseId)
+    tableView.tableFooterView = footerView
     navigationItem.searchController = searchController
     navigationItem.hidesSearchBarWhenScrolling = false
     searchController.searchBar.delegate = self
@@ -87,8 +90,15 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
     interactor?.doSomething(request: request)
   }
   
+  func displayLoader() {
+    footerView.showLoader()
+    tracks = []
+    tableView.reloadData()
+  }
   func displaySomething(viewModel: Search.Something.ViewModel)
   {
+
+    footerView.hideLoader()
     tracks = viewModel.cells
     tableView.reloadData()
 
@@ -107,6 +117,33 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
     let track = tracks[indexPath.row]
     cell.configure(with: track)
     return cell
+  }
+  
+  override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let label = UILabel()
+    label.text = "Please enter search term above..."
+    label.textAlignment = .center
+    label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+    return label
+  }
+  
+  override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    tracks.isEmpty ? 100 : 0
+  }
+  
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let track = tracks[indexPath.row]
+    print(track.artistName)
+    let keyWindow = UIApplication
+      .shared
+      .connectedScenes
+      .filter({$0.activationState == .foregroundActive })
+      .compactMap { $0 as? UIWindowScene }
+      .first?.windows
+      .filter({ $0.isKeyWindow }).first
+    let trackDetailsView = TrackdetailView(frame: .zero)
+    keyWindow?.addSubview(trackDetailsView)
+    trackDetailsView.anchor(top: keyWindow?.safeAreaLayoutGuide.topAnchor, left: keyWindow?.leftAnchor, bottom: keyWindow?.bottomAnchor, right: keyWindow?.rightAnchor)
   }
 }
 

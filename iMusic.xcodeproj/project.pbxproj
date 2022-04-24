@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E81D49DF2814CEC40061DCFE /* TrackdetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81D49DE2814CEC40061DCFE /* TrackdetailView.swift */; };
 		E8376B002810BE04002B7153 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8376AFF2810BE04002B7153 /* AppDelegate.swift */; };
 		E8376B022810BE04002B7153 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8376B012810BE04002B7153 /* SceneDelegate.swift */; };
 		E8376B042810BE04002B7153 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8376B032810BE04002B7153 /* ViewController.swift */; };
@@ -17,7 +18,6 @@
 		E8376B192810C232002B7153 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E8376B182810C232002B7153 /* LICENSE */; };
 		E8376B1D2810C2E8002B7153 /* MakeItSo.png in Resources */ = {isa = PBXBuildFile; fileRef = E8376B1C2810C2E8002B7153 /* MakeItSo.png */; };
 		E8376B1F2810C889002B7153 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8376B1E2810C889002B7153 /* MainTabBarController.swift */; };
-		E8376B212810C99C002B7153 /* OldSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8376B202810C99C002B7153 /* OldSearchViewController.swift */; };
 		E8376B242810EEFC002B7153 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E8376B232810EEFC002B7153 /* Alamofire */; };
 		E8376B282810F516002B7153 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8376B272810F515002B7153 /* SearchResponse.swift */; };
 		E8376B2A28111111002B7153 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8376B2928111110002B7153 /* NetworkService.swift */; };
@@ -31,9 +31,11 @@
 		E8675F2E2811BEDD00B27647 /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8675F282811BEDD00B27647 /* SearchInteractor.swift */; };
 		E8DAD1872813039600330783 /* TrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DAD1862813039600330783 /* TrackCell.swift */; };
 		E8DAD18A2813F7D000330783 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E8DAD1892813F7D000330783 /* Kingfisher */; };
+		E8DAD18C2814045000330783 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DAD18B2814045000330783 /* FooterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E81D49DE2814CEC40061DCFE /* TrackdetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackdetailView.swift; sourceTree = "<group>"; };
 		E8376AFC2810BE04002B7153 /* iMusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8376AFF2810BE04002B7153 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8376B012810BE04002B7153 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -46,7 +48,6 @@
 		E8376B182810C232002B7153 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		E8376B1C2810C2E8002B7153 /* MakeItSo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MakeItSo.png; sourceTree = "<group>"; };
 		E8376B1E2810C889002B7153 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		E8376B202810C99C002B7153 /* OldSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldSearchViewController.swift; sourceTree = "<group>"; };
 		E8376B272810F515002B7153 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		E8376B2928111110002B7153 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		E8675F1D281154BA00B27647 /* Then.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
@@ -58,6 +59,7 @@
 		E8675F272811BEDD00B27647 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		E8675F282811BEDD00B27647 /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
 		E8DAD1862813039600330783 /* TrackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCell.swift; sourceTree = "<group>"; };
+		E8DAD18B2814045000330783 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E81D49DD2814CEB20061DCFE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E8DAD1862813039600330783 /* TrackCell.swift */,
+				E8DAD18B2814045000330783 /* FooterView.swift */,
+				E81D49DE2814CEC40061DCFE /* TrackdetailView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		E8376AF32810BE04002B7153 = {
 			isa = PBXGroup;
 			children = (
@@ -100,7 +112,6 @@
 				E8376B012810BE04002B7153 /* SceneDelegate.swift */,
 				E8376B032810BE04002B7153 /* ViewController.swift */,
 				E8376B1E2810C889002B7153 /* MainTabBarController.swift */,
-				E8376B202810C99C002B7153 /* OldSearchViewController.swift */,
 				E8675F1C2811549800B27647 /* Extensions */,
 				E858AA07281120E100157C94 /* Services */,
 				E8376B0B2810BE06002B7153 /* Assets.xcassets */,
@@ -162,7 +173,7 @@
 				E8675F262811BEDD00B27647 /* SearchModels.swift */,
 				E8675F272811BEDD00B27647 /* SearchViewController.swift */,
 				E8675F282811BEDD00B27647 /* SearchInteractor.swift */,
-				E8DAD1862813039600330783 /* TrackCell.swift */,
+				E81D49DD2814CEB20061DCFE /* Views */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -249,9 +260,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8675F2D2811BEDD00B27647 /* SearchViewController.swift in Sources */,
+				E81D49DF2814CEC40061DCFE /* TrackdetailView.swift in Sources */,
 				E8675F292811BEDD00B27647 /* SearchPresenter.swift in Sources */,
 				E8675F2E2811BEDD00B27647 /* SearchInteractor.swift in Sources */,
-				E8376B212810C99C002B7153 /* OldSearchViewController.swift in Sources */,
+				E8DAD18C2814045000330783 /* FooterView.swift in Sources */,
 				E8376B042810BE04002B7153 /* ViewController.swift in Sources */,
 				E8376B2A28111111002B7153 /* NetworkService.swift in Sources */,
 				E8376B0A2810BE04002B7153 /* iMusic.xcdatamodeld in Sources */,

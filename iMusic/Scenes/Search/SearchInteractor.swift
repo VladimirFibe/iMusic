@@ -33,9 +33,12 @@ class SearchInteractor: SearchBusinessLogic, SearchDataStore
   
   func doSomething(request: Search.Something.Request)
   {
+    presenter?.showLoader()
     networkService.fetchTracks(request.searchText) { [weak self] response in
       let response = Search.Something.Response(searchResponse: response)
       self?.presenter?.presentSomething(response: response)
+      
+      
     }
 
     worker = SearchWorker()

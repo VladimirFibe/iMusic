@@ -9,9 +9,13 @@ import UIKit
 import Kingfisher
 import AVFoundation
 
+protocol TrackMovingDelegate: AnyObject {
+  func getTrack(isForwardTrack: Bool) -> Search.Something.ViewModel.Cell?
+}
 class TrackdetailView: UIView {
   let scale = 0.8
-
+  weak var delegate: TrackMovingDelegate?
+  
   let player = AVPlayer().then {
     $0.automaticallyWaitsToMinimizeStalling = false
   }
@@ -180,11 +184,13 @@ class TrackdetailView: UIView {
   }
   
   @objc func previousTrack() {
-    print(#function)
+    guard let track = delegate?.getTrack(isForwardTrack: true) else { return }
+    configure(with: track)
   }
   
   @objc func nextTrack() {
-    print(#function)
+    guard let track = delegate?.getTrack(isForwardTrack: false) else { return }
+    configure(with: track)
   }
   
   @objc func playTrackAction() {

@@ -143,6 +143,7 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
       .filter({ $0.isKeyWindow }).first
     let trackDetailsView = TrackdetailView(frame: .zero)
     trackDetailsView.configure(with: track)
+    trackDetailsView.delegate = self
     keyWindow?.addSubview(trackDetailsView)
     trackDetailsView.anchor(top: keyWindow?.safeAreaLayoutGuide.topAnchor, left: keyWindow?.leftAnchor, bottom: keyWindow?.bottomAnchor, right: keyWindow?.rightAnchor)
   }
@@ -155,5 +156,19 @@ extension SearchViewController: UISearchBarDelegate {
     timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
       self.doSomething(searchText)
     })
+  }
+}
+// MARK: - TrackMovingDelegate
+extension SearchViewController: TrackMovingDelegate {
+  func getTrack(isForwardTrack: Bool) -> Search.Something.ViewModel.Cell? {
+    guard let indexPath = tableView.indexPathForSelectedRow else { return nil }
+    tableView.deselectRow(at: indexPath, animated: true)
+    let sign = isForwardTrack ? 1 : -1
+    let count = searchViewModel.cells.count
+    let row = (indexPath.row + count + sign) % count
+    let nextIndexPath = IndexPath(row: row, section: indexPath.section)
+    tableView.selectRow(at: nextIndexPath, animated: true, scrollPosition: .none)
+    let cellViewModel = searchViewModel.cells[nextIndexPath.row]
+    return cellViewModel
   }
 }

@@ -22,7 +22,7 @@ enum Search
       var searchResponse: SearchResponse?
     }
     struct ViewModel {
-      let cells: [Cell]
+      var cells: [Cell]
       struct Cell: TrackCellViewModel {
         var iconUrlString: String
         var trackName: String

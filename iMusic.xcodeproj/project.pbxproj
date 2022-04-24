@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E81D49DF2814CEC40061DCFE /* TrackdetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81D49DE2814CEC40061DCFE /* TrackdetailView.swift */; };
+		E81D49E1281515810061DCFE /* CMTime + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81D49E0281515810061DCFE /* CMTime + Extensions.swift */; };
 		E8376B002810BE04002B7153 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8376AFF2810BE04002B7153 /* AppDelegate.swift */; };
 		E8376B022810BE04002B7153 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8376B012810BE04002B7153 /* SceneDelegate.swift */; };
 		E8376B042810BE04002B7153 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8376B032810BE04002B7153 /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		E81D49DE2814CEC40061DCFE /* TrackdetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackdetailView.swift; sourceTree = "<group>"; };
+		E81D49E0281515810061DCFE /* CMTime + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMTime + Extensions.swift"; sourceTree = "<group>"; };
 		E8376AFC2810BE04002B7153 /* iMusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8376AFF2810BE04002B7153 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8376B012810BE04002B7153 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			children = (
 				E8675F1D281154BA00B27647 /* Then.swift */,
 				E8675F1F2811554500B27647 /* UIView + Extensions.swift */,
+				E81D49E0281515810061DCFE /* CMTime + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				E8DAD1872813039600330783 /* TrackCell.swift in Sources */,
 				E8675F2C2811BEDD00B27647 /* SearchModels.swift in Sources */,
 				E8376B282810F516002B7153 /* SearchResponse.swift in Sources */,
+				E81D49E1281515810061DCFE /* CMTime + Extensions.swift in Sources */,
 				E8376B1F2810C889002B7153 /* MainTabBarController.swift in Sources */,
 				E8376B002810BE04002B7153 /* AppDelegate.swift in Sources */,
 				E8376B022810BE04002B7153 /* SceneDelegate.swift in Sources */,
@@ -414,7 +418,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 723HTEFHBA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iMusic/Info.plist;
@@ -426,7 +430,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.ilines.nsu.iMusic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -441,7 +445,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 723HTEFHBA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iMusic/Info.plist;
@@ -453,7 +457,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.ilines.nsu.iMusic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

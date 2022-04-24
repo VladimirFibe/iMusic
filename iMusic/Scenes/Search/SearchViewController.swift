@@ -21,7 +21,7 @@ protocol SearchDisplayLogic: AnyObject
 class SearchViewController: UITableViewController, SearchDisplayLogic {
   var interactor: SearchBusinessLogic?
   var router: (NSObjectProtocol & SearchRoutingLogic & SearchDataPassing)?
-  var tracks = [TrackCellViewModel]()
+  private var searchViewModel = Search.Something.ViewModel(cells: [])
   let searchController = UISearchController(searchResultsController: nil)
   private var timer: Timer?
   private lazy var footerView = FooterView()
@@ -78,6 +78,7 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
     navigationItem.hidesSearchBarWhenScrolling = false
     searchController.searchBar.delegate = self
     searchController.obscuresBackgroundDuringPresentation = false
+    searchBar(searchController.searchBar, textDidChange: "minacelentano")
   }
   
   // MARK: Do something
@@ -92,14 +93,14 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
   
   func displayLoader() {
     footerView.showLoader()
-    tracks = []
+    searchViewModel.cells = []
     tableView.reloadData()
   }
   func displaySomething(viewModel: Search.Something.ViewModel)
   {
 
     footerView.hideLoader()
-    tracks = viewModel.cells
+    searchViewModel = viewModel
     tableView.reloadData()
 
     //nameTextField.text = viewModel.name
@@ -109,12 +110,12 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
     84.0
   }
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    tracks.count
+    searchViewModel.cells.count
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: TrackCell.reuseId, for: indexPath) as! TrackCell
-    let track = tracks[indexPath.row]
+    let track = searchViewModel.cells[indexPath.row]
     cell.configure(with: track)
     return cell
   }
@@ -128,12 +129,11 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
   }
   
   override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    tracks.isEmpty ? 100 : 0
+    searchViewModel.cells.isEmpty ? 100 : 0
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let track = tracks[indexPath.row]
-    print(track.artistName)
+    let track = searchViewModel.cells[indexPath.row]
     let keyWindow = UIApplication
       .shared
       .connectedScenes
@@ -142,6 +142,7 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
       .first?.windows
       .filter({ $0.isKeyWindow }).first
     let trackDetailsView = TrackdetailView(frame: .zero)
+    trackDetailsView.configure(with: track)
     keyWindow?.addSubview(trackDetailsView)
     trackDetailsView.anchor(top: keyWindow?.safeAreaLayoutGuide.topAnchor, left: keyWindow?.leftAnchor, bottom: keyWindow?.bottomAnchor, right: keyWindow?.rightAnchor)
   }

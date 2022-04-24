@@ -25,7 +25,7 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
   let searchController = UISearchController(searchResultsController: nil)
   private var timer: Timer?
   private lazy var footerView = FooterView()
-  
+  weak var tabBarDelegate: MainTabBarControllerDelegate?
   // MARK: Object lifecycle
   
   override init(style: UITableView.Style) {
@@ -132,30 +132,22 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
     searchViewModel.cells.isEmpty ? 100 : 0
   }
   
-  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+  override func tableView(_ tableView: UITableView,
+                          didSelectRowAt indexPath: IndexPath) {
     let track = searchViewModel.cells[indexPath.row]
-    let keyWindow = UIApplication
-      .shared
-      .connectedScenes
-      .filter({$0.activationState == .foregroundActive })
-      .compactMap { $0 as? UIWindowScene }
-      .first?.windows
-      .filter({ $0.isKeyWindow }).first
-    let trackDetailsView = TrackdetailView(frame: .zero)
-    trackDetailsView.configure(with: track)
-    trackDetailsView.delegate = self
-    keyWindow?.addSubview(trackDetailsView)
-    trackDetailsView.anchor(top: keyWindow?.safeAreaLayoutGuide.topAnchor, left: keyWindow?.leftAnchor, bottom: keyWindow?.bottomAnchor, right: keyWindow?.rightAnchor)
+    tabBarDelegate?.maximizeTrackDetailController(track: track)
   }
 }
 
 // MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
-  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+  func searchBar(_ searchBar: UISearchBar,
+                 textDidChange searchText: String) {
     timer?.invalidate()
-    timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
+    timer = Timer.scheduledTimer(withTimeInterval: 0.5,
+                                 repeats: false) { _ in
       self.doSomething(searchText)
-    })
+    }
   }
 }
 // MARK: - TrackMovingDelegate

@@ -15,6 +15,7 @@ protocol TrackMovingDelegate: AnyObject {
 class TrackdetailView: UIView {
   let scale = 0.8
   weak var delegate: TrackMovingDelegate?
+  weak var tabBarDelegate: MainTabBarControllerDelegate?
   
   let player = AVPlayer().then {
     $0.automaticallyWaitsToMinimizeStalling = false
@@ -166,7 +167,7 @@ class TrackdetailView: UIView {
   
   // MARK: - Action
   @objc func dragDownButtonAction() {
-    removeFromSuperview()
+    tabBarDelegate?.minimizeTrackDetailController()
   }
   
   @objc func handleCurrentTimeSlider() {
@@ -235,7 +236,7 @@ class TrackdetailView: UIView {
                  left: leftAnchor,
                  bottom: bottomAnchor,
                  right: rightAnchor,
-                 paddingTop: 0,
+                 paddingTop: 60,
                  paddingLeft: 30,
                  paddingBottom: 30,
                  paddingRight: 30)

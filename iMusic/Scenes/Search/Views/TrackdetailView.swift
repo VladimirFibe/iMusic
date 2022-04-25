@@ -113,6 +113,7 @@ class TrackdetailView: UIView {
     super.init(frame: frame)
     configureUI()
     configureMiniPlayer()
+    setupGesture()
   }
   
   required init?(coder: NSCoder) {
@@ -191,12 +192,59 @@ class TrackdetailView: UIView {
     let percentage = currentTimeSeconds / durationSeconds
     self.currentTimeSlider.value = Float(percentage)
   }
-  
-  // MARK: - Action
+ // MARK: - Maximizing and Minimizing gesutre
   @objc func dragDownButtonAction() {
     tabBarDelegate?.minimizeTrackDetailController()
   }
   
+  @objc func handleTapMaximized() {
+    tabBarDelegate?.maximizeTrackDetailController(track: nil)
+  }
+  
+  @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
+    switch gesture.state {
+    case .began: print("began")
+    case .changed: handlePanGesture(gesture)
+    case .ended: handlePanEnded(gesture)
+    default: print("default")
+    }
+  }
+  
+  private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
+    let offset = gesture.translation(in: self.superview).y
+    self.transform = CGAffineTransform(translationX: 0, y: offset)
+    if offset < 0 {
+      if offset > -200 {
+        let alpha = offset / 200
+        self.miniPlayerView.alpha = 1 + alpha
+        self.mainStack.alpha = -alpha
+      } else {
+        self.miniPlayerView.alpha = 0
+        self.mainStack.alpha = 1
+      }
+    }
+  }
+  
+  private func handlePanEnded(_ gesture: UIPanGestureRecognizer) {
+    let offset = gesture.translation(in: self.superview).y
+    let velocity = gesture.velocity(in: self.superview).y
+    UIView.animate(
+      withDuration: 0.5,
+      delay: 0,
+      usingSpringWithDamping: 0.7,
+      initialSpringVelocity: 1,
+      options: .curveEaseOut,
+      animations: {
+        self.transform = .identity
+        if offset < -200 || velocity < -500 {
+          self.tabBarDelegate?.maximizeTrackDetailController(track: nil)
+        } else {
+          self.miniPlayerView.alpha = 1
+          self.mainStack.alpha = 0
+        }
+      }, completion: nil)
+  }
+  // MARK: - Action
   @objc func handleCurrentTimeSlider() {
     let percentage = currentTimeSlider.value
     guard let duration = player.currentItem?.duration else { return }
@@ -234,14 +282,18 @@ class TrackdetailView: UIView {
       reduceTrackImageView()
     }
   }
-  // MARK: Configure UI
+  // MARK: Configure
+  private func setupGesture() {
+    miniPlayerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapMaximized)))
+    miniPlayerView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan)))
+  }
   func configureMiniPlayer() {
     addSubview(miniPlayerView)
     miniPlayerView.anchor(top: topAnchor,
                           left: leftAnchor,
                           right: rightAnchor,
                           height: 64)
-    miniPlayerView.backgroundColor = .white
+    miniPlayerView.backgroundColor = .secondarySystemBackground
     let divider = UIView()
     divider.backgroundColor = .opaqueSeparator
     miniPlayerView.addSubview(divider)
@@ -266,6 +318,7 @@ class TrackdetailView: UIView {
                  paddingBottom: 8,
                  paddingRight: 8)
   }
+  
   func configureUI() {
     backgroundColor = .white
     trackImage.transform = CGAffineTransform(scaleX: scale, y: scale)
@@ -295,8 +348,6 @@ class TrackdetailView: UIView {
                  paddingLeft: 30,
                  paddingBottom: 30,
                  paddingRight: 30)
-    
-    
   }
   
   deinit {

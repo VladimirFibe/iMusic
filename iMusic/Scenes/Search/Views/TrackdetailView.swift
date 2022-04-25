@@ -17,6 +17,23 @@ class TrackdetailView: UIView {
   weak var delegate: TrackMovingDelegate?
   weak var tabBarDelegate: MainTabBarControllerDelegate?
   
+  // MARK: MiniPlayer View
+  let miniPlayerView = UIView()
+  private lazy var miniPlayerPlayButton = UIButton(type: .system).then {
+    $0.widthAnchor.constraint(equalTo: $0.heightAnchor).isActive = true
+    $0.addTarget(self, action: #selector(playTrackAction), for: .touchUpInside)
+  }
+  private lazy var miniPlayerGoForwardButton = UIButton(type: .system).then {
+    $0.setImage(UIImage(systemName: "forward.fill"), for: .normal)
+    $0.widthAnchor.constraint(equalTo: $0.heightAnchor).isActive = true
+    $0.addTarget(self, action: #selector(nextTrack), for: .touchUpInside)
+  }
+  private let miniPlayerTrackImageView = UIImageView().then {
+    $0.widthAnchor.constraint(equalTo: $0.heightAnchor).isActive = true
+  }
+  private let miniPlayerTitleLabel = UILabel()
+  
+  // MARK: Main View
   let player = AVPlayer().then {
     $0.automaticallyWaitsToMinimizeStalling = false
   }
@@ -62,15 +79,14 @@ class TrackdetailView: UIView {
     $0.textAlignment = .center
   }
   lazy var leftButton = UIButton(type: .system).then {
-    $0.setImage(UIImage(named: "Left"), for: .normal)
+    $0.setImage(UIImage(systemName: "backward.fill"), for: .normal)
     $0.addTarget(self, action: #selector(previousTrack), for: .touchUpInside)
   }
   lazy var playButton = UIButton(type: .system).then {
-    $0.setImage(UIImage(named: "pause"), for: .normal)
     $0.addTarget(self, action: #selector(playTrackAction), for: .touchUpInside)
   }
   lazy var rightButton = UIButton(type: .system).then {
-    $0.setImage(UIImage(named: "Right"), for: .normal)
+    $0.setImage(UIImage(systemName: "forward.fill"), for: .normal)
     $0.addTarget(self, action: #selector(nextTrack), for: .touchUpInside)
   }
   let minImage = UIImageView(image: UIImage(named: "IconMin")).then {
@@ -87,9 +103,16 @@ class TrackdetailView: UIView {
     $0.setDimensions(width: 17, height: 17)
     $0.contentMode = .scaleAspectFit
   }
+  lazy var minStack = UIStackView(arrangedSubviews: [currentTimeLabel, durationLabel])
+  lazy var timeStack = UIStackView(arrangedSubviews: [currentTimeSlider, minStack])
+  lazy var trackStack = UIStackView(arrangedSubviews: [trackTitleLabel, authorTitleLabel])
+  lazy var playStack = UIStackView(arrangedSubviews: [leftButton, playButton, rightButton])
+  lazy var soundStack = UIStackView(arrangedSubviews: [minImage, volumeSlider, maxImage])
+  lazy var mainStack = UIStackView(arrangedSubviews: [dragDownButton, trackImage, timeStack, trackStack, playStack, soundStack])
   override init(frame: CGRect) {
     super.init(frame: frame)
     configureUI()
+    configureMiniPlayer()
   }
   
   required init?(coder: NSCoder) {
@@ -98,11 +121,15 @@ class TrackdetailView: UIView {
   
   func configure(with track: Search.Something.ViewModel.Cell) {
     trackTitleLabel.text = track.trackName
+    miniPlayerTitleLabel.text = track.trackName
     authorTitleLabel.text = track.artistName
     playTrack(track.previewUrl)
     let string600 = track.iconUrlString.replacingOccurrences(of: "100x100", with: "600x600")
     let url = URL(string: string600)
     trackImage.kf.setImage(with: url)
+    miniPlayerTrackImageView.kf.setImage(with: url)
+    playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+    miniPlayerPlayButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
     monitorStartTime()
     observePlayerCurrentTime()
   }
@@ -197,42 +224,70 @@ class TrackdetailView: UIView {
   @objc func playTrackAction() {
     if player.timeControlStatus == .paused {
       player.play()
-      playButton.setImage(UIImage(named: "pause"), for: .normal)
+      playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+      miniPlayerPlayButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
       enlargeTrackImageView()
     } else {
       player.pause()
-      playButton.setImage(UIImage(named: "play"), for: .normal)
+      playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+      miniPlayerPlayButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
       reduceTrackImageView()
     }
   }
-  
+  // MARK: Configure UI
+  func configureMiniPlayer() {
+    addSubview(miniPlayerView)
+    miniPlayerView.anchor(top: topAnchor,
+                          left: leftAnchor,
+                          right: rightAnchor,
+                          height: 64)
+    miniPlayerView.backgroundColor = .white
+    let divider = UIView()
+    divider.backgroundColor = .opaqueSeparator
+    miniPlayerView.addSubview(divider)
+    divider.anchor(top: miniPlayerView.topAnchor,
+                  left: miniPlayerView.leftAnchor,
+                  right: miniPlayerView.rightAnchor,
+                  height: 1)
+    let stack = UIStackView(arrangedSubviews: [
+      miniPlayerTrackImageView,
+      miniPlayerTitleLabel,
+      miniPlayerPlayButton,
+      miniPlayerGoForwardButton])
+    stack.axis = .horizontal
+    stack.spacing = 16
+    miniPlayerView.addSubview(stack)
+    stack.anchor(top: miniPlayerView.topAnchor,
+                 left: miniPlayerView.leftAnchor,
+                 bottom: miniPlayerView.bottomAnchor,
+                 right: miniPlayerView.rightAnchor,
+                 paddingTop: 8,
+                 paddingLeft: 8,
+                 paddingBottom: 8,
+                 paddingRight: 8)
+  }
   func configureUI() {
     backgroundColor = .white
     trackImage.transform = CGAffineTransform(scaleX: scale, y: scale)
     
-    let minStack = UIStackView(arrangedSubviews: [currentTimeLabel, durationLabel])
     minStack.axis = .horizontal
     minStack.distribution = .fillEqually
-    let timeStack = UIStackView(arrangedSubviews: [currentTimeSlider, minStack])
     timeStack.axis = .vertical
-    let trackStack = UIStackView(arrangedSubviews: [trackTitleLabel, authorTitleLabel])
+    playStack.axis = .horizontal
     trackStack.axis = .vertical
     
-    let playStack = UIStackView(arrangedSubviews: [leftButton, playButton, rightButton])
-    playStack.axis = .horizontal
     playStack.alignment = .center
     playStack.distribution = .fillEqually
-    let soundStack = UIStackView(arrangedSubviews: [minImage, volumeSlider, maxImage])
     soundStack.axis = .horizontal
     soundStack.alignment = .fill
     soundStack.distribution = .fill
     soundStack.spacing = 10
-    let stack = UIStackView(arrangedSubviews: [dragDownButton, trackImage, timeStack, trackStack, playStack, soundStack])
-    stack.axis = .vertical
-    stack.distribution = .fill
-    stack.spacing = 10
-    addSubview(stack)
-    stack.anchor(top: topAnchor,
+    
+    mainStack.axis = .vertical
+    mainStack.distribution = .fill
+    mainStack.spacing = 10
+    addSubview(mainStack)
+    mainStack.anchor(top: topAnchor,
                  left: leftAnchor,
                  bottom: bottomAnchor,
                  right: rightAnchor,
@@ -240,6 +295,8 @@ class TrackdetailView: UIView {
                  paddingLeft: 30,
                  paddingBottom: 30,
                  paddingRight: 30)
+    
+    
   }
   
   deinit {

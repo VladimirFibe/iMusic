@@ -58,8 +58,8 @@ class MainTabBarController: UITabBarController {
 
 extension MainTabBarController: MainTabBarControllerDelegate {
   func maximizeTrackDetailController(track: Search.Something.ViewModel.Cell?) {
-    maximizedTopAnchorConstraint.isActive = true
     minimizedTopAnchorConstraint.isActive = false
+    maximizedTopAnchorConstraint.isActive = true
     maximizedTopAnchorConstraint.constant = 0
     bottomAnchorConstraint.constant = 0
     UIView.animate(
@@ -95,8 +95,6 @@ extension MainTabBarController: MainTabBarControllerDelegate {
         self.trackDetailsView.mainStack.alpha = 0
       }, completion: nil)
   }
-  
-  
 }
 
 // MARK: - Preview

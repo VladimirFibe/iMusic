@@ -197,13 +197,34 @@ class TrackdetailView: UIView {
     tabBarDelegate?.minimizeTrackDetailController()
   }
   
+  @objc func dragDownPanGesture(_ gesture: UIPanGestureRecognizer) {
+    let offset = gesture.translation(in: self.superview).y
+    if offset > 0 {
+      
+      switch gesture.state {
+      case .changed: mainStack.transform = CGAffineTransform(translationX: 0, y: offset)
+      case .ended: UIView.animate(
+        withDuration: 0.5,
+        delay: 0,
+        usingSpringWithDamping: 0.7,
+        initialSpringVelocity: 1,
+        options: .curveEaseOut,
+        animations: {
+          self.mainStack.transform = .identity
+          if offset > 50 {
+            self.tabBarDelegate?.minimizeTrackDetailController()
+          }
+        }, completion: nil)
+      default: print("default")
+      }
+    }
+  }
   @objc func handleTapMaximized() {
     tabBarDelegate?.maximizeTrackDetailController(track: nil)
   }
   
   @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
     switch gesture.state {
-    case .began: print("began")
     case .changed: handlePanGesture(gesture)
     case .ended: handlePanEnded(gesture)
     default: print("default")
@@ -286,6 +307,7 @@ class TrackdetailView: UIView {
   private func setupGesture() {
     miniPlayerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapMaximized)))
     miniPlayerView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan)))
+    addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(dragDownPanGesture)))
   }
   func configureMiniPlayer() {
     addSubview(miniPlayerView)

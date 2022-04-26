@@ -90,7 +90,6 @@ class TrackCell: UITableViewCell {
     var tracks = defaults.savedTracks()
     tracks.append(SearchViewModel.Cell(with: track))
     if let data = try? NSKeyedArchiver.archivedData(withRootObject: tracks, requiringSecureCoding: false) {
-      print("Успешно!")
       defaults.set(data, forKey: UserDefaults.favouriteTrackKey)
     }
   }

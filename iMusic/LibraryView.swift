@@ -10,34 +10,80 @@ import Kingfisher
 
 struct LibraryView: View {
   @State var tracks = UserDefaults.standard.savedTracks()
+  @State var show = false
+  @State var track: SearchViewModel.Cell?
+  var delegate: MainTabBarControllerDelegate?
   var body: some View {
     NavigationView {
-      VStack {
-        HStack(spacing: 20) {
-          Button {
-            
-          } label: {
-            ButtonView(icon: "play.fill")
-          }
-          Button {
-            
-          } label: {
-            ButtonView(icon: "arrow.triangle.2.circlepath")
-          }
-        }
-        Divider()
-        List(tracks) { track in
+      List {
+        ForEach(tracks) { track in
           LibraryRow(track: track)
-        }
-        .listStyle(.plain)
+            .gesture(
+              LongPressGesture()
+                .onEnded { _ in
+                  show.toggle()
+                  self.track = track
+                }
+                .simultaneously(with: TapGesture()
+                  .onEnded { _ in
+                    let keyWindow = UIApplication
+                      .shared
+                      .connectedScenes
+                      .filter({ $0.activationState == .foregroundActive })
+                      .map({ $0 as? UIWindowScene })
+                      .compactMap({ $0})
+                      .first?.windows
+                      .filter({$0.isKeyWindow })
+                      .first
+                    let tabBarVC = keyWindow?.rootViewController as? MainTabBarController
+                    tabBarVC?.trackDetailsView.delegate = self
+                    self.track = track
+                    delegate?.maximizeTrackDetailController(track: track.cell)
+                  })
+            )
+        }.onDelete(perform: delete)
       }
+      .listStyle(.plain)
       .padding()
       .navigationTitle("Library")
       .tint(Color.pink)
     }
+    .onAppear {
+      tracks = UserDefaults.standard.savedTracks()
+    }
+    .actionSheet(isPresented: $show) {
+      ActionSheet(title: Text("Are you sure you want to delete this track?"), buttons: [
+        .destructive(Text("Delete"), action: deleteTrack),
+        .cancel()])
+    }
+  }
+  func deleteTrack() {
+    guard let track = track else { return }
+    guard let index = tracks.firstIndex(where: {$0.trackName == track.trackName && $0.artistName == track.artistName }) else { return }
+    tracks.remove(at: index)
+    if let data = try? NSKeyedArchiver.archivedData(withRootObject: tracks, requiringSecureCoding: false) {
+      UserDefaults.standard.set(data, forKey: UserDefaults.favouriteTrackKey)
+    }
+  }
+  func delete(at offsets: IndexSet) {
+    tracks.remove(atOffsets: offsets)
+    if let data = try? NSKeyedArchiver.archivedData(withRootObject: tracks, requiringSecureCoding: false) {
+      UserDefaults.standard.set(data, forKey: UserDefaults.favouriteTrackKey)
+    }
   }
 }
 
+extension LibraryView: TrackMovingDelegate {
+  func getTrack(isForwardTrack: Bool) -> Search.Something.ViewModel.Cell? {
+    guard let track = track else { return nil }
+    guard let index = tracks.firstIndex(of: track) else { return nil }
+    let sign = isForwardTrack ? 1 : -1
+    let count = tracks.count
+    let row = (index + count + sign) % count
+    self.track = tracks[row]
+    return self.track?.cell
+  }
+}
 struct LibraryRow: View {
   let track: SearchViewModel.Cell
   var body: some View {
@@ -46,13 +92,14 @@ struct LibraryRow: View {
         .resizable()
         .frame(width: 60, height: 60)
         .cornerRadius(2)
-      VStack {
+      VStack(alignment: .leading) {
         Text(track.trackName)
         Text(track.artistName)
       }
     }
   }
 }
+
 struct ButtonView: View {
   let color = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
   let icon: String
@@ -63,6 +110,7 @@ struct ButtonView: View {
       .background(Color(color), in: RoundedRectangle(cornerRadius: 10))
   }
 }
+
 struct LibraryView_Previews: PreviewProvider {
   static var previews: some View {
     LibraryView()

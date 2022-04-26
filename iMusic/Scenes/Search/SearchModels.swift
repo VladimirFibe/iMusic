@@ -23,7 +23,7 @@ enum Search
     }
     struct ViewModel {
       var cells: [Cell]
-      struct Cell: TrackCellViewModel {
+      struct Cell {
         var iconUrlString: String
         var trackName: String
         var artistName: String
@@ -85,7 +85,14 @@ class SearchViewModel: NSObject, NSCoding {
       self.artistName = artistName
       self.previewUrl = previewUrl
     }
-    
+    var cell: Search.Something.ViewModel.Cell {
+      Search.Something.ViewModel.Cell(
+        iconUrlString: self.iconUrlString ?? "",
+        trackName: self.trackName,
+        artistName: self.artistName,
+        collectionName: self.collectionName,
+        previewUrl: self.previewUrl)
+    }
   }
   init(cells: [Cell]) {
     self.cells = cells

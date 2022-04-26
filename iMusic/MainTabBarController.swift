@@ -23,7 +23,9 @@ class MainTabBarController: UITabBarController {
     view.backgroundColor = .white
     tabBar.tintColor = #colorLiteral(red: 1, green: 0.1725490196, blue: 0.4509803922, alpha: 1) // FF2C73
     setupTrackDetailView()
-    let libraryView = UIHostingController(rootView: LibraryView())
+    var libraryUIView = LibraryView()
+    libraryUIView.delegate = self
+    let libraryView = UIHostingController(rootView: libraryUIView)
     libraryView.tabBarItem.title = "Library"
     libraryView.tabBarItem.image = UIImage(named: "Library")
     searchViewController.tabBarDelegate = self

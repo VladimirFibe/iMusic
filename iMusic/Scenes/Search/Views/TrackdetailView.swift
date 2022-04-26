@@ -9,12 +9,12 @@ import UIKit
 import Kingfisher
 import AVFoundation
 
-protocol TrackMovingDelegate: AnyObject {
+protocol TrackMovingDelegate {
   func getTrack(isForwardTrack: Bool) -> Search.Something.ViewModel.Cell?
 }
 class TrackdetailView: UIView {
   let scale = 0.8
-  weak var delegate: TrackMovingDelegate?
+  var delegate: TrackMovingDelegate?
   weak var tabBarDelegate: MainTabBarControllerDelegate?
   
   // MARK: MiniPlayer View
@@ -200,7 +200,6 @@ class TrackdetailView: UIView {
   @objc func dragDownPanGesture(_ gesture: UIPanGestureRecognizer) {
     let offset = gesture.translation(in: self.superview).y
     if offset > 0 {
-      
       switch gesture.state {
       case .changed: mainStack.transform = CGAffineTransform(translationX: 0, y: offset)
       case .ended: UIView.animate(
@@ -370,9 +369,5 @@ class TrackdetailView: UIView {
                  paddingLeft: 30,
                  paddingBottom: 30,
                  paddingRight: 30)
-  }
-  
-  deinit {
-    print("Bye Bye")
   }
 }

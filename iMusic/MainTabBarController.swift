@@ -23,13 +23,16 @@ class MainTabBarController: UITabBarController {
     view.backgroundColor = .white
     tabBar.tintColor = #colorLiteral(red: 1, green: 0.1725490196, blue: 0.4509803922, alpha: 1) // FF2C73
     setupTrackDetailView()
+    let libraryView = UIHostingController(rootView: LibraryView())
+    libraryView.tabBarItem.title = "Library"
+    libraryView.tabBarItem.image = UIImage(named: "Library")
     searchViewController.tabBarDelegate = self
-    viewControllers = [generateViewController(rootViewController: searchViewController,
-                                              image: UIImage(systemName: "magnifyingglass"),
-                                              title: "Search"),
-                       generateViewController(rootViewController: ViewController(),
-                                              image: UIImage(named: "Library"),
-                                              title: "Library")]
+    let navigationVC = UINavigationController(rootViewController: searchViewController)
+    navigationVC.tabBarItem.title = "Search"
+    navigationVC.tabBarItem.image = UIImage(systemName: "magnifyingglass")
+    searchViewController.navigationItem.title = "Search"
+    navigationVC.navigationBar.prefersLargeTitles = true
+    viewControllers = [libraryView, navigationVC]
   }
   
   private func generateViewController(rootViewController: UIViewController, image: UIImage?, title: String) -> UIViewController {

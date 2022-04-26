@@ -23,7 +23,6 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
   var router: (NSObjectProtocol & SearchRoutingLogic & SearchDataPassing)?
   private var searchViewModel = Search.Something.ViewModel(cells: [])
   let searchController = UISearchController(searchResultsController: nil)
-  private var timer: Timer?
   private lazy var footerView = FooterView()
   weak var tabBarDelegate: MainTabBarControllerDelegate?
   // MARK: Object lifecycle
@@ -143,9 +142,7 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
 extension SearchViewController: UISearchBarDelegate {
   func searchBar(_ searchBar: UISearchBar,
                  textDidChange searchText: String) {
-    timer?.invalidate()
-    timer = Timer.scheduledTimer(withTimeInterval: 0.5,
-                                 repeats: false) { _ in
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
       self.doSomething(searchText)
     }
   }

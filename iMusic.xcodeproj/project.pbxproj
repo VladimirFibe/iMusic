@@ -33,6 +33,8 @@
 		E8DAD1872813039600330783 /* TrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DAD1862813039600330783 /* TrackCell.swift */; };
 		E8DAD18A2813F7D000330783 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E8DAD1892813F7D000330783 /* Kingfisher */; };
 		E8DAD18C2814045000330783 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DAD18B2814045000330783 /* FooterView.swift */; };
+		E8DD1C1328177F2800D3A2C1 /* UserDefaults + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DD1C1228177F2800D3A2C1 /* UserDefaults + Extensions.swift */; };
+		E8E327E028167B3C00A7BB53 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E327DF28167B3C00A7BB53 /* LibraryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,8 @@
 		E8675F282811BEDD00B27647 /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
 		E8DAD1862813039600330783 /* TrackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCell.swift; sourceTree = "<group>"; };
 		E8DAD18B2814045000330783 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
+		E8DD1C1228177F2800D3A2C1 /* UserDefaults + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults + Extensions.swift"; sourceTree = "<group>"; };
+		E8E327DF28167B3C00A7BB53 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,7 @@
 				E8675F212811BE9700B27647 /* Scenes */,
 				E8376AFF2810BE04002B7153 /* AppDelegate.swift */,
 				E8376B012810BE04002B7153 /* SceneDelegate.swift */,
+				E8E327DF28167B3C00A7BB53 /* LibraryView.swift */,
 				E8376B032810BE04002B7153 /* ViewController.swift */,
 				E8376B1E2810C889002B7153 /* MainTabBarController.swift */,
 				E8675F1C2811549800B27647 /* Extensions */,
@@ -155,6 +160,7 @@
 				E8675F1D281154BA00B27647 /* Then.swift */,
 				E8675F1F2811554500B27647 /* UIView + Extensions.swift */,
 				E81D49E0281515810061DCFE /* CMTime + Extensions.swift */,
+				E8DD1C1228177F2800D3A2C1 /* UserDefaults + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -270,6 +276,8 @@
 				E8376B042810BE04002B7153 /* ViewController.swift in Sources */,
 				E8376B2A28111111002B7153 /* NetworkService.swift in Sources */,
 				E8376B0A2810BE04002B7153 /* iMusic.xcdatamodeld in Sources */,
+				E8E327E028167B3C00A7BB53 /* LibraryView.swift in Sources */,
+				E8DD1C1328177F2800D3A2C1 /* UserDefaults + Extensions.swift in Sources */,
 				E8675F2A2811BEDD00B27647 /* SearchWorker.swift in Sources */,
 				E8675F202811554500B27647 /* UIView + Extensions.swift in Sources */,
 				E8DAD1872813039600330783 /* TrackCell.swift in Sources */,
